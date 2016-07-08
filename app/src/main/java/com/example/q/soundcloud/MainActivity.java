@@ -1,6 +1,9 @@
 package com.example.q.soundcloud;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +22,8 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -53,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
                             public void onCompleted(GraphResponse response) {
                                  /* handle the result */
                                 // {Response:  responseCode: 200, graphObject: {"name":"Lee  Ju Hee","id":"991091207678109"}, error: null}
-                                Log.e("response",response.getJSONObject().toString());
-                                Intent intent = new Intent(MainActivity.this, SoundMainActivty.class);
-                                intent.putExtra("UserInfo",response.getJSONObject().toString());
-                                startActivity(intent);
+                                Toast.makeText(MainActivity.this, "Loading.... Please wait", Toast.LENGTH_LONG).show();
+                                UserLogin login = new UserLogin(getApplicationContext());
+                                login.execute("http://143.248.47.56:1337",response.getJSONObject().toString());
                             }
                         }
                 ).executeAsync();
             }
+
 
             @Override
             public void onCancel() {
