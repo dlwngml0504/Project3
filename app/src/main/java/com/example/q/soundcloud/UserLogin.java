@@ -5,21 +5,21 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
-/**
- * Created by q on 2016-07-08.
- */
 public class UserLogin extends AsyncTask<String,Void,Boolean>{
     private Context mcontext;
+    private String user;
     public UserLogin (Context context) {
         mcontext = context;
     }
 
     @Override
     protected Boolean doInBackground(String... params) {
-        new HttpConnectionThread().doInBackground(params[0]+"/login",params[1]);
-        return true;
+        Boolean bool = new HttpConnectionThread().doInBackground(params[0]+"/login",params[1]);
+        user = params[1];
+        //new HttpConnectionThread().doInBackground(params[0]+"/register",params[1]);
+        Log.e("UserLogin",bool.toString());
+        return bool;
     }
-
 
     @Override
     protected void onPostExecute(Boolean result) {
@@ -32,6 +32,10 @@ public class UserLogin extends AsyncTask<String,Void,Boolean>{
         }
         else {
             Log.e("UserLoginjava","false");
+            Intent intent = new Intent(mcontext, Firststep_register.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("user",user);
+            mcontext.startActivity(intent);
             //new HttpConnectionThread().doInBackground(params[0]+"/register",params[1]);
         }
     }

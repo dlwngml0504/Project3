@@ -11,9 +11,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpConnectionThread extends AsyncTask<String,Void, String> {
+public class HttpConnectionThread extends AsyncTask<String,Void, Boolean> {
     @Override
-    protected String doInBackground(String... url) {
+    protected Boolean doInBackground(String... url) {
         URL murl;
         String response = null;
         Log.e("HttpConnectionThread","I'm in");
@@ -40,10 +40,15 @@ public class HttpConnectionThread extends AsyncTask<String,Void, String> {
             os.flush();
             os.close();
             response = conn.getResponseMessage();
-
+            Log.e("Httpresponde",response.toString());
+            if (response.toString().equals("OK")) {
+                Log.e("HttpConnectionThread","TRUE");
+                return true;
+            }
         } catch (IOException e) {
 
         }
-        return response;
+        Log.e("HttpConnectionThread","FALSE");
+        return false;
     }
 }
