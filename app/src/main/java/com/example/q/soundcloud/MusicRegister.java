@@ -19,15 +19,12 @@ public class MusicRegister extends AsyncTask<String,Void,Boolean> {
     protected Boolean doInBackground(String... params) {
         Boolean bool = new HttpConnectionThread().doInBackground(params[0]+"/upload",params[1]);
         music = params[1];
-        //new HttpConnectionThread().doInBackground(params[0]+"/register",params[1]);
-        Log.e("UserLogin",bool.toString());
         return bool;
     }
 
     @Override
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
-        Log.e("UserRegister","true");
         Intent intent = new Intent(mcontext, SoundMainActivty.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mcontext.startActivity(intent);
