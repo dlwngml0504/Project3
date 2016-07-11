@@ -11,16 +11,16 @@
     tools:context="com.example.q.soundcloud.Firststep_register">
 
     <Button
-        android:id="@+id/listener"
+        android:id="@+id/listener_reg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Listener"
-        android:onClick="registListener"/>
+        android:onClick="ButtonOnClick"/>
 
     <Button
-        android:id="@+id/musician"
+        android:id="@+id/musician_reg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Musician"
-        android:onClick="registMusician"/>
+        android:onClick="ButtonOnClick"/>
 </LinearLayout>

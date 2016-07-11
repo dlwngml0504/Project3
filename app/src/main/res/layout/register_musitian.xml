@@ -50,7 +50,7 @@
             android:hint="1002-880-199605"/>
     </LinearLayout>
     <Button
-        android:id="@+id/registerbtn"
+        android:id="@+id/musitian_registerbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="저장"/>
