@@ -1,5 +1,7 @@
 package com.example.q.soundcloud;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+
+import java.io.File;
 
 public class SoundMainActivty extends AppCompatActivity {
     /**
@@ -30,6 +40,9 @@ public class SoundMainActivty extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    String path;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +79,48 @@ public class SoundMainActivty extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_upload) {
-            return true;
+        if (id == R.id.action_select) {
+            Intent fintent = new Intent(Intent.ACTION_GET_CONTENT);
+            fintent.setType("audio/mp3");
+            try {
+                startActivityForResult(fintent, 100);
+            } catch (ActivityNotFoundException e) {
+
+            }
         }
+
+        else if (id == R.id.action_upload) {
+            AmazonS3 s3client = new AmazonS3Client(new BasicAWSCredentials(
+                    "AKIAJGEFZ3A36W6ZV7SQ",
+                    "s/1rCzEmA8Xf2rA4ZKn+jSF7jgp9B/zsersOTVie"));
+
+            try {
+                System.out
+                        .println("Uploading a new object to S3 from a file\n");
+                File file = new File(path);
+                s3client.putObject(new PutObjectRequest("kaistcs4961",
+                        file.getName(), file));
+
+            } catch (AmazonServiceException ase) {
+                System.out
+                        .println("Caught an AmazonServiceException, which "
+                                + "means your request made it "
+                                + "to Amazon S3, but was rejected with an error response"
+                                + " for some reason.");
+                System.out.println("Error Message:    " + ase.getMessage());
+                System.out.println("HTTP Status Code: "
+                        + ase.getStatusCode());
+                System.out.println("AWS Error Code:   "
+                        + ase.getErrorCode());
+                System.out.println("Error Type:       "
+                        + ase.getErrorType());
+                System.out.println("Request ID:       "
+                        + ase.getRequestId());
+
+
+            }
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

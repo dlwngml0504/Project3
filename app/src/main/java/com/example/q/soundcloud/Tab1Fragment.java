@@ -7,17 +7,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Tab1Fragment  extends Fragment {
 
     private ImageButton playButton, pauseButton, playerButton;
     private ProgressBar progressBar;
+    private ListView musicList;
 
+    ArrayList<String> music_list = new ArrayList<>();
+
+    private ArrayAdapter<String> adapter;
 
     private boolean isPlaying;
 
@@ -38,8 +47,10 @@ public class Tab1Fragment  extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        music_list.add("let+it+go+-+idina+menzel");
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, music_list);
     }
 
     @Override
@@ -51,7 +62,21 @@ public class Tab1Fragment  extends Fragment {
         pauseButton = (ImageButton) view.findViewById(R.id.button_pause);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         playerButton = (ImageButton) view.findViewById(R.id.button_showmenu);
+        musicList = (ListView) view.findViewById(R.id.musiclist);
+
         final LinearLayout menu = (LinearLayout) view.findViewById(R.id.menu);
+
+
+
+        musicList.setAdapter(adapter);
+        musicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                String title = adapter.getItem(position);
+                Toast.makeText(getContext(), "Play" + title, Toast.LENGTH_SHORT).show();
+                startStreamingAudio(title);
+            }
+        });
 
         playerButton.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
@@ -68,7 +93,11 @@ public class Tab1Fragment  extends Fragment {
         playButton.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startStreamingAudio();
+                if (!audioStreamer.getMediaPlayer().isPlaying()){
+                    audioStreamer.getMediaPlayer().start();
+                    audioStreamer.startPlayProgressUpdater();
+                }
+                isPlaying = !isPlaying;
             }});
 
         pauseButton.setOnClickListener(new ImageButton.OnClickListener() {
@@ -76,12 +105,11 @@ public class Tab1Fragment  extends Fragment {
             public void onClick(View view) {
                 if (audioStreamer.getMediaPlayer().isPlaying()) {
                     audioStreamer.getMediaPlayer().pause();
-                } else {
-                    audioStreamer.getMediaPlayer().start();
-                    audioStreamer.startPlayProgressUpdater();
                 }
                 isPlaying = !isPlaying;
             }});
+
+
         return view;
     }
 
@@ -97,13 +125,13 @@ public class Tab1Fragment  extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void startStreamingAudio() {
+    private void startStreamingAudio(String title) {
         try {
             if ( audioStreamer != null) {
                 audioStreamer.interrupt();
             }
             audioStreamer = new StreamingMediaPlayer(getActivity(), playButton, progressBar);
-            audioStreamer.startStreaming("https://s3.amazonaws.com/kaistcs4961/let+it+go+-+idina+menzel.mp3",5208, 216);
+            audioStreamer.startStreaming("https://s3.amazonaws.com/kaistcs4961/" + title + ".mp3",5208, 216);
         } catch (IOException e) {
             Log.e(getClass().getName(), "Error starting to stream audio.", e);
         }
