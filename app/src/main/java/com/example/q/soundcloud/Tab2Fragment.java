@@ -3,13 +3,21 @@ package com.example.q.soundcloud;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Tab2Fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private CheckBox cb1, cb2, cb3,cb4,cb5;
+
 
     public Tab2Fragment() {
         // Required empty public constructor
@@ -32,8 +40,47 @@ public class Tab2Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.tab2, container, false);
+        Bundle b = getActivity().getIntent().getExtras();
+        View view = inflater.inflate(R.layout.tab2, container, false);
+        Log.e("Tab2",b.getString("userinfo"));
+        Button btn = (Button)view.findViewById(R.id.select_btn);
+
+        cb1 = (CheckBox)view.findViewById(R.id.checkBox51);
+        cb2 = (CheckBox)view.findViewById(R.id.checkBox52);
+        cb3 = (CheckBox)view.findViewById(R.id.checkBox53);
+        cb4 = (CheckBox)view.findViewById(R.id.checkBox54);
+        cb5 = (CheckBox)view.findViewById(R.id.checkBox55);
+        if (btn!=null) {
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    JSONObject jo = new JSONObject();
+                    try {
+                        if (cb1.isChecked()){
+                            jo.put("pop",true);
+                        }
+                        if (cb2.isChecked()){
+                            jo.put("OST",true);
+                        }
+                        if (cb3.isChecked()){
+                            jo.put("rap",true);
+                        }
+                        if (cb4.isChecked()){
+                            jo.put("indi",true);
+                        }
+                        if (cb5.isChecked()){
+                            jo.put("metal",true);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    MusicSearch musicsearch = new MusicSearch(getActivity().getApplicationContext());
+                    musicsearch.execute("http://143.248.47.56:1337",jo.toString());
+                }
+            });
+        }
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
