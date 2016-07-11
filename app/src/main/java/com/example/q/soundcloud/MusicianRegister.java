@@ -22,7 +22,6 @@ public class MusicianRegister extends AppCompatActivity implements AdapterView.O
     ArrayList<String> arraylist1;
     private String bank_name;
     private CheckBox cb1,cb2,cb3,cb4,cb5;
-    private String interest="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,30 +60,40 @@ public class MusicianRegister extends AppCompatActivity implements AdapterView.O
                         userinfo.put("state","Musician");
                         userinfo.put("bank",bank_name);
                         if (cb1.isChecked()){
-                            Log.e("MusicianRegister","CHECK BOX1");
-                            interest += "가요";
+                            userinfo.put("song",true);
+                        }
+                        else {
+                            userinfo.put("song",false);
                         }
                         if (cb2.isChecked()){
-                            Log.e("MusicianRegister","CHECK BOX2");
-                            interest += " OST";
+                            userinfo.put("OST",true);
+                        }
+                        else {
+                            userinfo.put("OST",false);
                         }
                         if (cb3.isChecked()){
-                            Log.e("MusicianRegister","CHECK BOX3");
-                            interest += " 인디음악";
+                            userinfo.put("rap",true);
+                        }
+                        else {
+                            userinfo.put("song",false);
                         }
                         if (cb4.isChecked()){
-                            Log.e("MusicianRegister","CHECK BOX4");
-                            interest += " 랩/힙합";
+                            userinfo.put("indi",true);
+                        }
+                        else {
+                            userinfo.put("indi",false);
                         }
                         if (cb5.isChecked()){
-                            Log.e("MusicianRegister","CHECK BOX5");
-                            interest += " 록/메탈";
+                            userinfo.put("metal",true);
                         }
-                        userinfo.put("interest",interest);
+                        else {
+                            userinfo.put("metal",false);
+                        }
                         Log.e("MusicianRegister",userinfo.toString());
                         UserRegister register = new UserRegister(getApplicationContext());
                         register.execute("http://143.248.47.56:1337",userinfo.toString());
                         Intent intent2 = new Intent(MusicianRegister.this,SoundMainActivty.class);
+                        intent2.putExtra("userinfo",intent.getStringExtra("user"));
                         startActivity(intent2);
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -28,6 +28,7 @@ public class UserLogin extends AsyncTask<String,Void,Boolean>{
             Log.e("UserLoginjava","true");
             Intent intent = new Intent(mcontext, SoundMainActivty.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("userinfo",user.toString());
             mcontext.startActivity(intent);
         }
         else {

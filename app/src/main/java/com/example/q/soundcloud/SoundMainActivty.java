@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -50,7 +51,7 @@ public class SoundMainActivty extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
+    private Intent intent;
     String path;
 
 
@@ -58,6 +59,8 @@ public class SoundMainActivty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sound_main_activty);
+        intent = new Intent(this, UploadMusic.class);
+        intent.putExtra("userinfo",intent.getStringExtra("userinfo"));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -100,7 +103,6 @@ public class SoundMainActivty extends AppCompatActivity {
             try {
                 startActivityForResult(fintent, 100);
             } catch (ActivityNotFoundException e) {
-
             }
         }
 
@@ -108,7 +110,6 @@ public class SoundMainActivty extends AppCompatActivity {
             AmazonS3 s3client = new AmazonS3Client(new BasicAWSCredentials(
                     "AKIAJGEFZ3A36W6ZV7SQ",
                     "s/1rCzEmA8Xf2rA4ZKn+jSF7jgp9B/zsersOTVie"));
-
             try {
                 System.out
                         .println("Uploading a new object to S3 from a file\n");
@@ -131,29 +132,13 @@ public class SoundMainActivty extends AppCompatActivity {
                         + ase.getErrorType());
                 System.out.println("Request ID:       "
                         + ase.getRequestId());
-
-
             }
-
+            startActivity(intent);
         }
 
         else if (id == R.id.action_test){
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.get("http://127.0.0.1:8080/api/songs/", new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    Log.e("결과", responseBody.toString());
-                }
 
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                }
-            });
         }
-
-
-
 
         return super.onOptionsItemSelected(item);
     }
