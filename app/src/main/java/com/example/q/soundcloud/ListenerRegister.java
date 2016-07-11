@@ -42,34 +42,19 @@ public class ListenerRegister extends AppCompatActivity {
                         userinfo.put("id",userinfo.getString("id"));
                         userinfo.put("state","Listener");
                         if (cb1.isChecked()){
-                            userinfo.put("song",true);
-                        }
-                        else {
-                            userinfo.put("song",false);
+                            userinfo.put("pop",true);
                         }
                         if (cb2.isChecked()){
                             userinfo.put("OST",true);
                         }
-                        else {
-                            userinfo.put("OST",false);
-                        }
                         if (cb3.isChecked()){
                             userinfo.put("rap",true);
                         }
-                        else {
-                            userinfo.put("song",false);
-                        }
                         if (cb4.isChecked()){
                             userinfo.put("indi",true);
-                         }
-                        else {
-                            userinfo.put("indi",false);
                         }
                         if (cb5.isChecked()){
                             userinfo.put("metal",true);
-                        }
-                        else {
-                            userinfo.put("metal",false);
                         }
                         UserRegister register = new UserRegister(getApplicationContext());
                         register.execute("http://143.248.47.56:1337",userinfo.toString());

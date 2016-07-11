@@ -51,7 +51,7 @@ public class SoundMainActivty extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private Intent intent;
+    private Intent intent2;
     String path;
 
 
@@ -59,9 +59,10 @@ public class SoundMainActivty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sound_main_activty);
-        intent = new Intent(this, UploadMusic.class);
-        intent.putExtra("userinfo",intent.getStringExtra("userinfo"));
-
+        Intent intent = getIntent();
+        intent2 = new Intent(this, UploadMusic.class);
+        intent2.putExtra("userinfo",intent.getStringExtra("userinfo"));
+        Log.e("SoundMainActivity",intent.getStringExtra("userinfo"));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -133,7 +134,7 @@ public class SoundMainActivty extends AppCompatActivity {
                 System.out.println("Request ID:       "
                         + ase.getRequestId());
             }
-            startActivity(intent);
+            startActivity(intent2);
         }
 
         else if (id == R.id.action_test){
