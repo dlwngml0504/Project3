@@ -9,33 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context=".MusicianRegister">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="계좌 번호를 입력해주세요" />
 
-    <LinearLayout
+    <Spinner
+        android:id="@+id/spinner1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="신분"/>
-        <EditText
-            android:id="@+id/state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Listner or Musitian"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="은행"/>
-        <EditText
-            android:id="@+id/bank"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="우리은행"/>
-    </LinearLayout>
+        android:layout_height="wrap_content" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

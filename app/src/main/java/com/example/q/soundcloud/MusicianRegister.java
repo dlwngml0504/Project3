@@ -5,23 +5,39 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MusicianRegister extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class MusicianRegister extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
+    ArrayList<String> arraylist1;
+    private String bank_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_musitian);
-        final EditText state = (EditText)findViewById(R.id.state);
-        final EditText bank = (EditText)findViewById(R.id.bank);
         final EditText accountnumber = (EditText)findViewById(R.id.accountnumber);
         Button btn = (Button)findViewById(R.id.musitian_registerbtn);
+        arraylist1 = new ArrayList<String>();
+        arraylist1.add("우리은행");
+        arraylist1.add("우체국");
+        arraylist1.add("신한은행");
+        arraylist1.add("국민은행");
 
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_dropdown_item, arraylist1);
+
+        Spinner sp1 = (Spinner) this.findViewById(R.id.spinner1);
+        sp1.setPrompt("골라봐"); // 스피너 제목
+        sp1.setAdapter(adapter1);
+        sp1.setOnItemSelectedListener(this);
         if (btn!=null){
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -31,9 +47,9 @@ public class MusicianRegister extends AppCompatActivity {
                         JSONObject userinfo = new JSONObject(intent.getStringExtra("user"));
                         userinfo.put("name",userinfo.getString("name"));
                         userinfo.put("id",userinfo.getString("id"));
-                        userinfo.put("bank",bank.getText());
                         userinfo.put("accountnumber",accountnumber.getText());
-                        userinfo.put("state",state.getText());
+                        userinfo.put("state","Musician");
+                        userinfo.put("bank",bank_name);
                         Log.e("MusicianRegister",userinfo.toString());
                         UserRegister register = new UserRegister(getApplicationContext());
                         register.execute("http://143.248.47.56:1337",userinfo.toString());
@@ -46,5 +62,16 @@ public class MusicianRegister extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Toast.makeText(this, arraylist1.get(i), Toast.LENGTH_LONG).show();//해당목차눌렸을때
+        bank_name = arraylist1.get(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        // TODO Auto-generated method stub
     }
 }
