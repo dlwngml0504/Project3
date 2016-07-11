@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -20,12 +21,19 @@ import java.util.ArrayList;
 public class MusicianRegister extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
     ArrayList<String> arraylist1;
     private String bank_name;
+    private CheckBox cb1,cb2,cb3,cb4,cb5;
+    private String interest="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_musitian);
         final EditText accountnumber = (EditText)findViewById(R.id.accountnumber);
         Button btn = (Button)findViewById(R.id.musitian_registerbtn);
+        cb1 = (CheckBox)findViewById(R.id.checkBox1);
+        cb2 = (CheckBox)findViewById(R.id.checkBox2);
+        cb3 = (CheckBox)findViewById(R.id.checkBox3);
+        cb4 = (CheckBox)findViewById(R.id.checkBox4);
+        cb5 = (CheckBox)findViewById(R.id.checkBox5);
         arraylist1 = new ArrayList<String>();
         arraylist1.add("우리은행");
         arraylist1.add("우체국");
@@ -38,6 +46,8 @@ public class MusicianRegister extends AppCompatActivity implements AdapterView.O
         sp1.setPrompt("골라봐"); // 스피너 제목
         sp1.setAdapter(adapter1);
         sp1.setOnItemSelectedListener(this);
+
+
         if (btn!=null){
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -50,6 +60,27 @@ public class MusicianRegister extends AppCompatActivity implements AdapterView.O
                         userinfo.put("accountnumber",accountnumber.getText());
                         userinfo.put("state","Musician");
                         userinfo.put("bank",bank_name);
+                        if (cb1.isChecked()){
+                            Log.e("MusicianRegister","CHECK BOX1");
+                            interest += "가요";
+                        }
+                        if (cb2.isChecked()){
+                            Log.e("MusicianRegister","CHECK BOX2");
+                            interest += " OST";
+                        }
+                        if (cb3.isChecked()){
+                            Log.e("MusicianRegister","CHECK BOX3");
+                            interest += " 인디음악";
+                        }
+                        if (cb4.isChecked()){
+                            Log.e("MusicianRegister","CHECK BOX4");
+                            interest += " 랩/힙합";
+                        }
+                        if (cb5.isChecked()){
+                            Log.e("MusicianRegister","CHECK BOX5");
+                            interest += " 록/메탈";
+                        }
+                        userinfo.put("interest",interest);
                         Log.e("MusicianRegister",userinfo.toString());
                         UserRegister register = new UserRegister(getApplicationContext());
                         register.execute("http://143.248.47.56:1337",userinfo.toString());

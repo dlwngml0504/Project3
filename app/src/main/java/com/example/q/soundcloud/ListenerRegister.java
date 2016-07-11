@@ -1,43 +1,73 @@
 package com.example.q.soundcloud;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-public class ListenerRegister extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    ArrayList<String> arraylist2;
+public class ListenerRegister extends AppCompatActivity {
+    private CheckBox cb1,cb2,cb3,cb4,cb5;
+    private String interest="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_listener);
 
-        arraylist2 = new ArrayList<String>();
-        arraylist2.add("우리은행");
-        arraylist2.add("우체국");
-        arraylist2.add("신한은행");
-        arraylist2.add("국민은행");
+        cb1 = (CheckBox)findViewById(R.id.checkBox11);
+        cb2 = (CheckBox)findViewById(R.id.checkBox12);
+        cb3 = (CheckBox)findViewById(R.id.checkBox13);
+        cb4 = (CheckBox)findViewById(R.id.checkBox14);
+        cb5 = (CheckBox)findViewById(R.id.checkBox15);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_dropdown_item, arraylist2);
+        Button btn = (Button)findViewById(R.id.listener_registerbtn);
+        if (btn!=null){
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = getIntent();
+                    try {
+                        JSONObject userinfo = new JSONObject(intent.getStringExtra("user"));
+                        userinfo.put("name",userinfo.getString("name"));
+                        userinfo.put("id",userinfo.getString("id"));
+                        userinfo.put("state","Listener");
+                        if (cb1.isChecked()){
+                            interest += "가요";
+                        }
+                        if (cb2.isChecked()){
+                            interest += " OST";
+                        }
+                        if (cb3.isChecked()){
+                            interest += " 인디음악";
+                        }
+                        if (cb4.isChecked()){
+                            interest += " 랩/힙합";
+                        }
+                        if (cb5.isChecked()){
+                            interest += " 록/메탈";
+                        }
+                        userinfo.put("interest",interest);
+                        UserRegister register = new UserRegister(getApplicationContext());
+                        register.execute("http://143.248.47.56:1337",userinfo.toString());
+                        Intent intent2 = new Intent(ListenerRegister.this,SoundMainActivty.class);
+                        startActivity(intent2);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-        Spinner sp2 = (Spinner) this.findViewById(R.id.spinner2);
-        sp2.setPrompt("골라봐"); // 스피너 제목
-        sp2.setAdapter(adapter2);
-        sp2.setOnItemSelectedListener(this);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(this, arraylist2.get(i), Toast.LENGTH_LONG).show();//해당목차눌렸을때
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        // TODO Auto-generated method stub
+                }
+            });
+        }
     }
 }
