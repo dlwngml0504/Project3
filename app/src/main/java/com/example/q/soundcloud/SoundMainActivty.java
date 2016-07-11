@@ -217,18 +217,18 @@ public class SoundMainActivty extends AppCompatActivity {
             String ARG_SECTION_NUMBER = "section_number";
 
             switch (position){
-                case 0:
-                    return Tab1Fragment.newInstance();
-                case 1:
-                    return Tab2Fragment.newInstance();
-                default:
-                    return Tab3Fragment.newInstance();
-            }
+            case 0:
+            return Tab1Fragment.newInstance();
+            case 1:
+            return Tab2Fragment.newInstance();
+            default:
+            return Tab3Fragment.newInstance();
         }
+    }
 
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
+    @Override
+    public int getCount() {
+        // Show 3 total pages.
             return 3;
         }
 
