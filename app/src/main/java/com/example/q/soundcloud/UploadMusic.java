@@ -14,18 +14,13 @@ import org.json.JSONObject;
 
 public class UploadMusic extends AppCompatActivity {
     private CheckBox cb1,cb2,cb3,cb4,cb5;
+    private String userinfoString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_music);
         final Intent intent = getIntent();
-        Log.e("UploadMusic","1");
-/*        JSONObject userinfo = null;
-        try {
-            userinfo = new JSONObject(intent.getStringExtra("userinfo"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
+        userinfoString = intent.getStringExtra("userinfo");
         //Log.e("UploadMusic",intent.getStringExtra("userinfo"));
         cb1 = (CheckBox)findViewById(R.id.checkBox21);
         cb2 = (CheckBox)findViewById(R.id.checkBox22);
@@ -50,44 +45,30 @@ public class UploadMusic extends AppCompatActivity {
                         musicinfo.put("composer",composer.getText());
                         musicinfo.put("singer",singer.getText());
                         if (cb1.isChecked()){
-                            musicinfo.put("song",true);
-                        }
-                        else {
-                            musicinfo.put("song",false);
+                            musicinfo.put("pop",true);
                         }
                         if (cb2.isChecked()){
                             musicinfo.put("OST",true);
                         }
-                        else {
-                            musicinfo.put("OST",false);
-                        }
                         if (cb3.isChecked()){
                             musicinfo.put("rap",true);
-                        }
-                        else {
-                            musicinfo.put("song",false);
                         }
                         if (cb4.isChecked()){
                             musicinfo.put("indi",true);
                         }
-                        else {
-                            musicinfo.put("indi",false);
-                        }
                         if (cb5.isChecked()){
                             musicinfo.put("metal",true);
                         }
-                        else {
-                            musicinfo.put("metal",false);
-                        }
+                        musicinfo.put("uploader",userinfoString);
+                        musicinfo.put("URL","https://s3.amazonaws.com/kaistcs4961/"+title.getText()+".mp3");
                         MusicRegister register = new MusicRegister(getApplicationContext());
-                        register.execute("http://143.248.47.56:1337",musicinfo.toString());
+                        register.execute("http://143.248.47.56:1337",musicinfo.toString(),userinfoString);
                         Intent intent2 = new Intent(UploadMusic.this,SoundMainActivty.class);
-                        intent2.putExtra("musicinfo",intent.getStringExtra("musicinfo"));
+                        intent2.putExtra("userinfo",userinfoString);
                         startActivity(intent2);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
             });
         }
