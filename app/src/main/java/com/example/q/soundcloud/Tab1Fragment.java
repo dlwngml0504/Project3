@@ -15,12 +15,14 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.MissingFormatArgumentException;
+
+import cz.msebera.android.httpclient.Header;
 
 public class Tab1Fragment  extends Fragment {
 
@@ -66,12 +68,13 @@ public class Tab1Fragment  extends Fragment {
         musicList = (ListView) view.findViewById(R.id.musiclist);
 
         final LinearLayout menu = (LinearLayout) view.findViewById(R.id.menu);
+        music_list.add("1");
 
-
-        MusicSearch musicsearch = new MusicSearch(getActivity().getApplicationContext()){
+       /*MusicSearch musicsearch = new MusicSearch(getActivity().getApplicationContext()){
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
+                music_list = new ArrayList<>();
                 //music_list = new ArrayList<>();
                 try {
                     JSONArray ja = new JSONArray(result);
@@ -82,10 +85,11 @@ public class Tab1Fragment  extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(Tab1Fragment.this).attach(Tab1Fragment.this).commit();
             }
         };
-        musicsearch.execute("http://143.248.47.56:1337","all");
-        music_list.add("let+it+go+-+idina+menzel");
+        musicsearch.execute("http://143.248.47.56:1337","all");*/
 
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, music_list);
 
@@ -95,7 +99,20 @@ public class Tab1Fragment  extends Fragment {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 String title = adapter.getItem(position);
                 Toast.makeText(getContext(), "Play  " + title, Toast.LENGTH_SHORT).show();
-                startStreamingAudio(title);
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams params = new RequestParams();
+                client.get("http://143.248.48.39:8080/getmusic/" + title, new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        Log.e("URL123", responseString);
+                        startStreamingAudio(responseString);
+                    }
+                });
             }
         });
 
@@ -129,7 +146,6 @@ public class Tab1Fragment  extends Fragment {
                 }
                 isPlaying = !isPlaying;
             }});
-
 
         return view;
     }
