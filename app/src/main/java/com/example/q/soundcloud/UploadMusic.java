@@ -1,8 +1,8 @@
 package com.example.q.soundcloud;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,13 +14,15 @@ import org.json.JSONObject;
 
 public class UploadMusic extends AppCompatActivity {
     private CheckBox cb1,cb2,cb3,cb4,cb5;
-    private String userinfoString;
+    private String userinfoString, name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_music);
         final Intent intent = getIntent();
         userinfoString = intent.getStringExtra("userinfo");
+        name = intent.getStringExtra("name");
+        Log.e("name", name);
         //Log.e("UploadMusic",intent.getStringExtra("userinfo"));
         cb1 = (CheckBox)findViewById(R.id.checkBox21);
         cb2 = (CheckBox)findViewById(R.id.checkBox22);
@@ -60,7 +62,8 @@ public class UploadMusic extends AppCompatActivity {
                             musicinfo.put("metal",true);
                         }
                         musicinfo.put("uploader",userinfoString);
-                        musicinfo.put("URL","https://s3.amazonaws.com/kaistcs4961/"+title.getText()+".mp3");
+                        musicinfo.put("URL","https://s3.amazonaws.com/kaistcs4961/"+ name +".mp3");
+                        Log.e("URL", "https://s3.amazonaws.com/kaistcs4961/"+ name +".mp3");
                         MusicRegister register = new MusicRegister(getApplicationContext());
                         register.execute("http://143.248.47.56:1337",musicinfo.toString(),userinfoString);
                         Intent intent2 = new Intent(UploadMusic.this,SoundMainActivty.class);
