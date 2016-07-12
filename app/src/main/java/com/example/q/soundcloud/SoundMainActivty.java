@@ -210,14 +210,14 @@ public class SoundMainActivty extends AppCompatActivity {
             String ARG_SECTION_NUMBER = "section_number";
 
             switch (position){
-            case 0:
-            return Tab1Fragment.newInstance();
-            case 1:
-            return Tab2Fragment.newInstance();
+                case 0:
+                    return Tab1Fragment.newInstance();
+                case 1:
+                    return Tab2Fragment.newInstance();
                 case 2:
                     return Tab4Fragment.newInstance();
-            default:
-            return Tab3Fragment.newInstance();
+                default:
+                    return Tab3Fragment.newInstance();
         }
     }
 

@@ -143,6 +143,7 @@ public class Tab3Fragment extends Fragment {
                                 String value = input.getText().toString();
                                 RequestParams params = new RequestParams();
                                 params.put("value", value);
+                                Log.e("Tab3",id);
                                 client.put("http://143.248.48.39:8080/buycash/" + id, params, new TextHttpResponseHandler() {
                                     @Override
                                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
