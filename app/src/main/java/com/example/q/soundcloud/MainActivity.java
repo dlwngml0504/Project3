@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                                 // {Response:  responseCode: 200, graphObject: {"name":"Lee  Ju Hee","id":"991091207678109"}, error: null}
                                 Toast.makeText(MainActivity.this, "Loading.... Please wait", Toast.LENGTH_LONG).show();
                                 UserLogin login = new UserLogin(getApplicationContext());
-                                login.execute("http://143.248.47.56:1337",response.getJSONObject().toString());
+                                login.execute("http://143.248.48.39:8080",response.getJSONObject().toString());
                             }
                         }
                 ).executeAsync();

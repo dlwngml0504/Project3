@@ -67,6 +67,7 @@ public class Tab1Fragment  extends Fragment {
         final LinearLayout menu = (LinearLayout) view.findViewById(R.id.menu);
 
 
+
         musicList.setAdapter(adapter);
         musicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

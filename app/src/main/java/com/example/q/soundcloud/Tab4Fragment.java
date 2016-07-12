@@ -1,5 +1,9 @@
 package com.example.q.soundcloud;
 
+/**
+ * Created by q on 2016-07-12.
+ */
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,13 +16,13 @@ import android.widget.CheckBox;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Tab2Fragment extends Fragment {
+public class Tab4Fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private CheckBox cb1, cb2, cb3,cb4,cb5;
 
 
-    public Tab2Fragment() {
+    public Tab4Fragment() {
         // Required empty public constructor
     }
 

@@ -15,26 +15,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import java.io.File;
-
-import cz.msebera.android.httpclient.Header;
 
 public class SoundMainActivty extends AppCompatActivity {
     /**
@@ -62,7 +56,6 @@ public class SoundMainActivty extends AppCompatActivity {
         Intent intent = getIntent();
         intent2 = new Intent(this, UploadMusic.class);
         intent2.putExtra("userinfo",intent.getStringExtra("userinfo"));
-        Log.e("SoundMainActivity",intent.getStringExtra("userinfo"));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -221,6 +214,8 @@ public class SoundMainActivty extends AppCompatActivity {
             return Tab1Fragment.newInstance();
             case 1:
             return Tab2Fragment.newInstance();
+                case 2:
+                    return Tab4Fragment.newInstance();
             default:
             return Tab3Fragment.newInstance();
         }
@@ -229,7 +224,7 @@ public class SoundMainActivty extends AppCompatActivity {
     @Override
     public int getCount() {
         // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
@@ -241,6 +236,8 @@ public class SoundMainActivty extends AppCompatActivity {
                     return "SECTION 2";
                 case 2:
                     return "SECTION 3";
+                case 3:
+                    return "SECTION 4";
             }
             return null;
         }
