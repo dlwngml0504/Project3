@@ -53,7 +53,6 @@ public class Tab1Fragment  extends Fragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
     }
 
     @Override
