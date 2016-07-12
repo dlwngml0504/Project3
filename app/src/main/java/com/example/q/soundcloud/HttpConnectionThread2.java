@@ -24,14 +24,12 @@ public class HttpConnectionThread2  extends AsyncTask<String,Void, String> {
     @Override
     protected String doInBackground(String... url) {
         URL murl;
-        String response = null;
         try {
             murl = new URL(url[0]);
             HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
             conn.setRequestMethod("POST");
-            // conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
             conn.setRequestProperty("Accept-Charset", "UTF-8");
             conn.setDoOutput(true);
@@ -40,30 +38,19 @@ public class HttpConnectionThread2  extends AsyncTask<String,Void, String> {
 
             conn.getOutputStream();
             OutputStream os =  conn.getOutputStream();
-            Log.e("Http2-url[0]",url[0].toString());
-            Log.e("Http2-url[1]",url[1].toString());
             os.write(url[1].getBytes("UTF-8"));
             os.flush();
             os.close();
-            response = conn.getResponseMessage();
             InputStream inputstream = conn.getInputStream();
             BufferedReader in = new BufferedReader( new InputStreamReader(inputstream ));
 
             String inputLine;
-            StringBuffer response2 = new StringBuffer();
             if ((inputLine = in.readLine()) != null) {
                 return inputLine.toString();
-                /*response2.append(inputLine);
-                try {
-                    JSONArray ja = new JSONArray(inputLine);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
             }
             in.close();
         } catch (IOException e) {
         }
-        Log.e("HttpConnectionThread2","FALSE");
         return "";
     }
 }

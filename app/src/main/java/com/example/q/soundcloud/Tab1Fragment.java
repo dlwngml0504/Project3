@@ -15,6 +15,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -23,6 +26,8 @@ public class Tab1Fragment  extends Fragment {
     private ImageButton playButton, pauseButton, playerButton;
     private ProgressBar progressBar;
     private ListView musicList;
+    private ListView                m_ListView;
+    private CustomerAdapter    m_Adapter;
 
     ArrayList<String> music_list = new ArrayList<>();
 
@@ -49,15 +54,14 @@ public class Tab1Fragment  extends Fragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        music_list.add("let+it+go+-+idina+menzel");
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, music_list);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.tab1, container, false);
+        final View view = inflater.inflate(R.layout.tab1, container, false);
         playButton = (ImageButton) view.findViewById(R.id.button_play);
         pauseButton = (ImageButton) view.findViewById(R.id.button_pause);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
@@ -66,7 +70,25 @@ public class Tab1Fragment  extends Fragment {
 
         final LinearLayout menu = (LinearLayout) view.findViewById(R.id.menu);
 
+        MusicSearch musicsearch = new MusicSearch(getActivity().getApplicationContext()){
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+                try {
+                    JSONArray ja = new JSONArray(result);
+                    for (int i=0;i<ja.length();i++){
+                        music_list.add(ja.getJSONObject(i).getString("title"));
+                    }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        musicsearch.execute("http://143.248.47.56:1337","all");
+        //music_list.add("let+it+go+-+idina+menzel");
+
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, music_list);
 
         musicList.setAdapter(adapter);
         musicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -136,4 +158,12 @@ public class Tab1Fragment  extends Fragment {
             Log.e(getClass().getName(), "Error starting to stream audio.", e);
         }
     }
+    private AdapterView.OnItemClickListener onClickListItem = new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            // 이벤트 발생 시 해당 아이템 위치의 텍스트를 출력
+            Toast.makeText(getActivity().getApplicationContext(),"CLI~~~~k", Toast.LENGTH_SHORT).show();
+        }
+    };
 }
