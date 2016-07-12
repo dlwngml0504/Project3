@@ -84,14 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("After","Error");
             }
         });
-        Button pass = (Button) findViewById(R.id.pass);
-        pass.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SoundMainActivty.class);
-                startActivity(intent);
-            }
-        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)

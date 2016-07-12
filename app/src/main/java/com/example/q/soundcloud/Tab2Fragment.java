@@ -85,22 +85,16 @@ public class Tab2Fragment extends Fragment {
                             super.onPostExecute(result);
                             try {
                                 JSONArray ja = new JSONArray(result);
-                                Log.e("Tab2Frag",ja.toString());
                                 m_Adapter = new CustomerAdapter();
-
                                 // Xml에서 추가한 ListView 연결
                                 m_ListView = (ListView) view.findViewById(R.id.musicList);
-
                                 // ListView에 어댑터 연결
-                               m_ListView.setAdapter(m_Adapter);
-
+                                m_ListView.setAdapter(m_Adapter);
                                 // ListView 아이템 터치 시 이벤트 추가
-                                 m_ListView.setOnItemClickListener(onClickListItem);
-
+                                //m_ListView.setOnItemClickListener(onClickListItem);
                                 for (int i=0;i<ja.length();i++){
                                     m_Adapter.add(ja.getJSONObject(i).toString());
                                 }
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -110,7 +104,6 @@ public class Tab2Fragment extends Fragment {
                 }
             });
         }
-
         return view;
     }
 
@@ -120,14 +113,14 @@ public class Tab2Fragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-    private AdapterView.OnItemClickListener onClickListItem = new AdapterView.OnItemClickListener() {
+/*    private AdapterView.OnItemClickListener onClickListItem = new AdapterView.OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
             // 이벤트 발생 시 해당 아이템 위치의 텍스트를 출력
             Toast.makeText(getActivity().getApplicationContext(),"CLI~~~~k", Toast.LENGTH_SHORT).show();
         }
-    };
+    };*/
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

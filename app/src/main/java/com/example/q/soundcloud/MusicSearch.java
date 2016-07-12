@@ -16,11 +16,8 @@ public class MusicSearch  extends AsyncTask<String,Void,String> {
 
     @Override
     protected String doInBackground(String... params) {
-        Log.e("MusicSearch",params[1]);
         if (params[1].equals("all")) {
-            Log.e("MusicSearch~~~~~",params[1]);
             String  str= new HttpConnectionThread2().doInBackground(params[0]+"/all/music",params[1]);
-            Log.e("MusicSearch~~~~~",str);
             return str;
         }
         String  str= new HttpConnectionThread2().doInBackground(params[0]+"/search/music",params[1]);

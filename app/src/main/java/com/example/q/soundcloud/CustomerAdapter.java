@@ -86,6 +86,5 @@ public class CustomerAdapter extends BaseAdapter {
     }
     public void add(String _msg) {
         m_List.add(_msg);
-
     }
 }
