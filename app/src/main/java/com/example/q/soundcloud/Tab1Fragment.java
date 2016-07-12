@@ -3,6 +3,7 @@ package com.example.q.soundcloud;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,9 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,7 +73,7 @@ public class Tab1Fragment  extends Fragment {
         final LinearLayout menu = (LinearLayout) view.findViewById(R.id.menu);
         music_list.add("1");
 
-       /*MusicSearch musicsearch = new MusicSearch(getActivity().getApplicationContext()){
+       MusicSearch musicsearch = new MusicSearch(getActivity().getApplicationContext()){
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
@@ -84,11 +88,11 @@ public class Tab1Fragment  extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.detach(Tab1Fragment.this).attach(Tab1Fragment.this).commit();
+                //FragmentTransaction ft = getFragmentManager().beginTransaction();
+                //ft.detach(Tab1Fragment.this).attach(Tab1Fragment.this).commit();
             }
         };
-        musicsearch.execute("http://143.248.47.56:1337","all");*/
+        musicsearch.execute("http://143.248.47.56:1337","all");
 
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, music_list);
 

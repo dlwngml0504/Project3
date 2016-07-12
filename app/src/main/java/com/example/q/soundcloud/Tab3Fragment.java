@@ -75,7 +75,7 @@ public class Tab3Fragment extends Fragment {
         final AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("userinfo", userinfo);
-        client.get("http://143.248.48.39:8080/userinfo", params, new TextHttpResponseHandler() {
+        client.get("http://143.248.47.56:1337/userinfo", params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -87,7 +87,7 @@ public class Tab3Fragment extends Fragment {
             }
         });
 
-        client.get("http://143.248.48.39:8080/userinfo/" + id, new TextHttpResponseHandler() {
+        client.get("http://143.248.47.56:1337/userinfo/" + id, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -111,7 +111,7 @@ public class Tab3Fragment extends Fragment {
                     user_musics.setText(String.valueOf(obj.getJSONArray("music").length()));
                     Log.e("metal", obj.get("metal").toString());
                     Log.e("likes", likes);
-                    if (likes == ""){
+                    if (likes.equals("")){
                         Log.e("likes", likes);
                        if (obj.getBoolean("POP")){
                             likes += "POP ";

@@ -3,6 +3,7 @@ package com.example.q.soundcloud;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -29,6 +30,7 @@ public class ListenerRegister extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = getIntent();
+                    Log.e("@@@@@@@2","@@@@@@@@@@@@");
                     try {
                         JSONObject userinfo = new JSONObject(intent.getStringExtra("user"));
                         userinfo.put("name",userinfo.getString("name"));
@@ -50,9 +52,10 @@ public class ListenerRegister extends AppCompatActivity {
                             userinfo.put("metal",true);
                         }
                         UserRegister register = new UserRegister(getApplicationContext());
-                        register.execute("http://143.248.48.39:8080",userinfo.toString());
+                        Log.e("ListenerReg",userinfo.toString());
+                        register.execute("http://143.248.47.56:1337",userinfo.toString());
                         Intent intent2 = new Intent(ListenerRegister.this,SoundMainActivty.class);
-                        intent2.putExtra("useinfo",intent.getStringExtra("user"));
+                        intent2.putExtra("userinfo",intent.getStringExtra("user"));
                         startActivity(intent2);
                     } catch (JSONException e) {
                         e.printStackTrace();

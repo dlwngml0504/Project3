@@ -74,12 +74,10 @@ public class MusicianRegister extends AppCompatActivity implements AdapterView.O
                         if (cb5.isChecked()){
                             userinfo.put("metal",true);
                         }
-                        Log.e("MusicianRegister",userinfo.toString());
                         UserRegister register = new UserRegister(getApplicationContext());
-                        register.execute("http://143.248.48.39:8080",userinfo.toString());
+                        register.execute("http://143.248.47.56:1337",userinfo.toString());
                         Intent intent2 = new Intent(MusicianRegister.this,SoundMainActivty.class);
                         intent2.putExtra("userinfo",intent.getStringExtra("user"));
-                        Log.e("MusicianRegister",intent.getStringExtra("user").toString());
                         startActivity(intent2);
                     } catch (JSONException e) {
                         e.printStackTrace();
