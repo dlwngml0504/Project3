@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -108,6 +109,9 @@ public class SoundMainActivty extends AppCompatActivity {
                 System.out
                         .println("Uploading a new object to S3 from a file\n");
                 File file = new File(path);
+                String name = file.getName().replaceAll("\\s", "+");
+                Log.e("name", name);
+                intent2.putExtra("name", name);
                 s3client.putObject(new PutObjectRequest("kaistcs4961",
                         file.getName(), file));
 
@@ -144,7 +148,6 @@ public class SoundMainActivty extends AppCompatActivity {
             case 100:
                 if (resultCode == RESULT_OK) {
                     path = getPathFromURI(data.getData());
-
                 }
         }
     }
