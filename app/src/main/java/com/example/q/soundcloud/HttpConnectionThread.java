@@ -16,7 +16,6 @@ public class HttpConnectionThread extends AsyncTask<String,Void, Boolean> {
     protected Boolean doInBackground(String... url) {
         URL murl;
         String response = null;
-        Log.e("HttpConnectionThread","I'm in");
         try {
             murl = new URL(url[0]);
             HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
@@ -35,8 +34,6 @@ public class HttpConnectionThread extends AsyncTask<String,Void, Boolean> {
             OutputStream os =  conn.getOutputStream();
 
             os.write(url[1].getBytes("UTF-8"));
-            Log.e("HttpConnectionThread",murl.toString());
-            Log.e("HttpConnectionThread",url[1].toString());
             os.flush();
             os.close();
             response = conn.getResponseMessage();

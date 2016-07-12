@@ -3,14 +3,26 @@ package com.example.q.soundcloud;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
-public class HttpConnectionThread2  extends AsyncTask<String,Void, Boolean> {
+public class HttpConnectionThread2  extends AsyncTask<String,Void, String> {
+    private List<JSONObject> music_list = new ArrayList<JSONObject>();
     @Override
-    protected Boolean doInBackground(String... url) {
+    protected String doInBackground(String... url) {
         URL murl;
         String response = null;
         try {
@@ -18,33 +30,40 @@ public class HttpConnectionThread2  extends AsyncTask<String,Void, Boolean> {
             HttpURLConnection conn = (HttpURLConnection) murl.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
+            conn.setRequestMethod("POST");
             // conn.setRequestProperty("Accept", "application/json");
             conn.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
             conn.setRequestProperty("Accept-Charset", "UTF-8");
-            conn.setDoInput(true);
             conn.setDoOutput(true);
-
+            conn.setDoInput(true);
             conn.connect();
 
             conn.getOutputStream();
             OutputStream os =  conn.getOutputStream();
-
+            Log.e("Http2-url[0]",url[0].toString());
+            Log.e("Http2-url[1]",url[1].toString());
             os.write(url[1].getBytes("UTF-8"));
-            Log.e("HttpConnectionThread2",murl.toString());
-            Log.e("HttpConnectionThread2",url[1].toString());
             os.flush();
             os.close();
             response = conn.getResponseMessage();
-            Log.e("Httpresponde",response.toString());
-            if (response.toString().equals("OK")) {
-                Log.e("HttpConnectionThread2","TRUE");
-                return true;
-            }
-        } catch (IOException e) {
+            InputStream inputstream = conn.getInputStream();
+            BufferedReader in = new BufferedReader( new InputStreamReader(inputstream ));
 
+            String inputLine;
+            StringBuffer response2 = new StringBuffer();
+            if ((inputLine = in.readLine()) != null) {
+                return inputLine.toString();
+                /*response2.append(inputLine);
+                try {
+                    JSONArray ja = new JSONArray(inputLine);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }*/
+            }
+            in.close();
+        } catch (IOException e) {
         }
         Log.e("HttpConnectionThread2","FALSE");
-        return false;
+        return "";
     }
 }

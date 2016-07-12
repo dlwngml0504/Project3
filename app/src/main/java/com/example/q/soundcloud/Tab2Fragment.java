@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -74,7 +75,18 @@ public class Tab2Fragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    MusicSearch musicsearch = new MusicSearch(getActivity().getApplicationContext());
+                    MusicSearch musicsearch = new MusicSearch(getActivity().getApplicationContext()){
+                        @Override
+                        protected void onPostExecute(String result) {
+                            super.onPostExecute(result);
+                            try {
+                                JSONArray ja = new JSONArray(result);
+                                Log.e("Tab2Frag",ja.toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
                     musicsearch.execute("http://143.248.47.56:1337",jo.toString());
                 }
             });
