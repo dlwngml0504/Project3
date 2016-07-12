@@ -67,6 +67,7 @@ public class Tab1Fragment  extends Fragment {
         final LinearLayout menu = (LinearLayout) view.findViewById(R.id.menu);
 
 
+
         musicList.setAdapter(adapter);
         musicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -124,13 +125,13 @@ public class Tab1Fragment  extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    private void startStreamingAudio(String title) {
+    private void startStreamingAudio(String url) {
         try {
             if ( audioStreamer != null) {
                 audioStreamer.interrupt();
             }
             audioStreamer = new StreamingMediaPlayer(getActivity(), playButton, progressBar);
-            audioStreamer.startStreaming("https://s3.amazonaws.com/kaistcs4961/" + title + ".mp3",5208, 216);
+            audioStreamer.startStreaming(url,5208, 216);
         } catch (IOException e) {
             Log.e(getClass().getName(), "Error starting to stream audio.", e);
         }

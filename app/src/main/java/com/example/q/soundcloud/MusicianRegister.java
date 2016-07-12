@@ -76,7 +76,7 @@ public class MusicianRegister extends AppCompatActivity implements AdapterView.O
                         }
                         Log.e("MusicianRegister",userinfo.toString());
                         UserRegister register = new UserRegister(getApplicationContext());
-                        register.execute("http://143.248.47.56:1337",userinfo.toString());
+                        register.execute("http://143.248.48.39:8080",userinfo.toString());
                         Intent intent2 = new Intent(MusicianRegister.this,SoundMainActivty.class);
                         intent2.putExtra("userinfo",intent.getStringExtra("user"));
                         Log.e("MusicianRegister",intent.getStringExtra("user").toString());

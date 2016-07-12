@@ -1,21 +1,14 @@
 package com.example.q.soundcloud;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class ListenerRegister extends AppCompatActivity {
     private CheckBox cb1,cb2,cb3,cb4,cb5;
@@ -57,7 +50,7 @@ public class ListenerRegister extends AppCompatActivity {
                             userinfo.put("metal",true);
                         }
                         UserRegister register = new UserRegister(getApplicationContext());
-                        register.execute("http://143.248.47.56:1337",userinfo.toString());
+                        register.execute("http://143.248.48.39:8080",userinfo.toString());
                         Intent intent2 = new Intent(ListenerRegister.this,SoundMainActivty.class);
                         intent2.putExtra("useinfo",intent.getStringExtra("user"));
                         startActivity(intent2);
