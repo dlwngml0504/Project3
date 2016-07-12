@@ -81,12 +81,13 @@
             android:text = "Follower : "
             android:textSize="30sp"
             android:paddingLeft="30dp"/>
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Follower"
             android:textSize="30sp"
-            android:id="@+id/user_follower"/>
+            android:id="@+id/user_follower"
+            android:background="#00ff0000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -98,12 +99,13 @@
             android:text = "Following : "
             android:textSize="30sp"
             android:paddingLeft="30dp"/>
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Following"
             android:textSize="30sp"
-            android:id="@+id/user_following"/>
+            android:id="@+id/user_following"
+            android:background="#00ff0000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -125,19 +127,22 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/music_layout"
+        android:visibility="gone">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Musics : "
             android:textSize="30sp"
             android:paddingLeft="30dp"/>
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Musics"
             android:textSize="30sp"
-            android:id="@+id/user_musics"/>
+            android:id="@+id/user_musics"
+            android:background="#00ff0000"/>
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"

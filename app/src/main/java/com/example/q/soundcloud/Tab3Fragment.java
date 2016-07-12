@@ -1,6 +1,7 @@
 package com.example.q.soundcloud;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -25,12 +27,13 @@ import cz.msebera.android.httpclient.Header;
 
 public class Tab3Fragment extends Fragment {
 
-    private TextView user_id, user_name, user_state, user_cash, user_follower, user_following, user_likes, user_musics;
-    private Button buycash;
+    private TextView user_id, user_name, user_state, user_cash, user_likes;
+    private Button buycash, user_follower, user_following, user_musics;
+    private LinearLayout user_musics_layout;
 
     String id = new String();
     String userinfo_string = new String();
-    String likes = new String();
+    String likes = "";
 
     private OnFragmentInteractionListener mListener;
 
@@ -62,10 +65,11 @@ public class Tab3Fragment extends Fragment {
         user_name = (TextView) view.findViewById(R.id.user_name);
         user_state = (TextView) view.findViewById(R.id.user_state);
         user_cash = (TextView) view.findViewById(R.id.user_cash);
-        user_follower = (TextView) view.findViewById(R.id.user_follower);
-        user_following = (TextView) view.findViewById(R.id.user_following);
+        user_follower = (Button) view.findViewById(R.id.user_follower);
+        user_following = (Button) view.findViewById(R.id.user_following);
         user_likes = (TextView) view.findViewById(R.id.user_likes);
-        user_musics = (TextView) view.findViewById(R.id.user_musics);
+        user_musics = (Button) view.findViewById(R.id.user_musics);
+        user_musics_layout = (LinearLayout) view.findViewById(R.id.music_layout);
         buycash = (Button) view.findViewById(R.id.buycash);
         Log.v("userinfo", userinfo);
         final AsyncHttpClient client = new AsyncHttpClient();
@@ -97,14 +101,18 @@ public class Tab3Fragment extends Fragment {
                     Log.e("obj", obj.toString());
                     user_id.setText(obj.get("id").toString());
                     user_name.setText(obj.get("name").toString());
+                    Log.e("state", obj.get("state").toString());
+                    if (obj.get("state").toString().equals("Musician"))
+                        user_musics_layout.setVisibility(View.VISIBLE);
                     user_state.setText(obj.get("state").toString());
                     user_cash.setText(obj.get("cash").toString());
                     user_follower.setText(String.valueOf(obj.getJSONArray("follower").length()));
                     user_following.setText(String.valueOf(obj.getJSONArray("following").length()));
                     user_musics.setText(String.valueOf(obj.getJSONArray("music").length()));
                     Log.e("metal", obj.get("metal").toString());
-
+                    Log.e("likes", likes);
                     if (likes == ""){
+                        Log.e("likes", likes);
                        if (obj.getBoolean("POP")){
                             likes += "POP ";
                         }
@@ -121,8 +129,8 @@ public class Tab3Fragment extends Fragment {
                             likes += "metal ";
                         }
                     }
-
                     user_likes.setText(likes);
+                    Log.e("likes", likes);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -143,7 +151,6 @@ public class Tab3Fragment extends Fragment {
                                 String value = input.getText().toString();
                                 RequestParams params = new RequestParams();
                                 params.put("value", value);
-                                Log.e("Tab3",id);
                                 client.put("http://143.248.48.39:8080/buycash/" + id, params, new TextHttpResponseHandler() {
                                     @Override
                                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -169,6 +176,31 @@ public class Tab3Fragment extends Fragment {
                 );
                 alert.show();
 
+            }
+        });
+
+
+        user_follower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), follower.class);
+                startActivity(intent);
+            }
+        });
+
+        user_following.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), following.class);
+                startActivity(intent);
+            }
+        });
+
+        user_musics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), musics.class);
+                startActivity(intent);
             }
         });
         return view;
