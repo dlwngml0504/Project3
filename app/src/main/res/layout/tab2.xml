@@ -67,10 +67,83 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="345dp"
         android:id="@+id/musicList"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity = "bottom"
+        android:background="@color/bg"
+        >
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:id="@+id/button_showmenu"
+            android:src="@drawable/ic_keyboard_arrow_right_white_24dp"
+            style="?android:attr/buttonStyleSmall"
+            android:background="@null"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:id="@+id/menu">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:id="@+id/button_playlist"
+                android:src="@drawable/ic_list_white_24dp"
+                style="?android:attr/buttonStyleSmall"
+                android:background="@null"/>
+            <LinearLayout
+                android:layout_width="207dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text ="Title"
+                    android:id="@+id/title"
+                    android:textSize="25sp"
+                    android:paddingTop="2dp"
+                    android:textColor="#FFFFFF"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Singer"
+                    android:id="@+id/singer"
+                    android:paddingBottom="3dp"
+                    android:textColor="#FFFFFF"></TextView>
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:id="@+id/button_play"
+                style="?android:attr/buttonStyleSmall"
+                android:src="@drawable/ic_play_arrow_white_24dp"
+                android:background="@null"/>
+            <ImageButton
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:id="@+id/button_pause"
+                style="?android:attr/buttonStyleSmall"
+                android:src="@drawable/ic_pause_white_24dp"
+                android:background="@null"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:layout_height="wrap_content"
+        android:layout_width="200px"
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"/>
 
 </LinearLayout>

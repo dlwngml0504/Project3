@@ -1,19 +1,16 @@
 package com.example.q.soundcloud;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +22,8 @@ public class Tab2Fragment extends Fragment {
     private CheckBox cb1, cb2, cb3,cb4,cb5;
     private ListView                m_ListView;
     private CustomerAdapter    m_Adapter;
+    private ProgressBar progressBar;
+    private ImageButton playButton, pauseButton;
 
     public Tab2Fragment() {
         // Required empty public constructor
@@ -49,6 +48,9 @@ public class Tab2Fragment extends Fragment {
                              Bundle savedInstanceState) {
         Bundle b = getActivity().getIntent().getExtras();
         final View view = inflater.inflate(R.layout.tab2, container, false);
+        progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+        playButton = (ImageButton) view.findViewById(R.id.button_play);
+        pauseButton = (ImageButton) view.findViewById(R.id.button_pause);
         Button btn = (Button)view.findViewById(R.id.select_btn);
         cb1 = (CheckBox)view.findViewById(R.id.checkBox51);
         cb2 = (CheckBox)view.findViewById(R.id.checkBox52);
@@ -85,7 +87,7 @@ public class Tab2Fragment extends Fragment {
                             super.onPostExecute(result);
                             try {
                                 JSONArray ja = new JSONArray(result);
-                                m_Adapter = new CustomerAdapter();
+                                m_Adapter = new CustomerAdapter(getActivity(), progressBar, playButton, pauseButton);
                                 // Xml에서 추가한 ListView 연결
                                 m_ListView = (ListView) view.findViewById(R.id.musicList);
                                 // ListView에 어댑터 연결
@@ -104,6 +106,7 @@ public class Tab2Fragment extends Fragment {
                 }
             });
         }
+
         return view;
     }
 
