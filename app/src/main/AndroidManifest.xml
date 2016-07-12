@@ -41,7 +41,8 @@
         <activity android:name=".MusicianRegister" />
         <activity android:name=".Firststep_register" />
         <activity android:name=".ListenerRegister" />
-        <activity android:name=".UploadMusic"></activity>
+        <activity android:name=".UploadMusic" />
+        <activity android:name=".DetailMusic"></activity>
     </application>
 
 </manifest>

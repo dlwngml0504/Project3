@@ -26,8 +26,9 @@
 
     <Button
         android:id="@+id/mListen"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
+        android:text="노래 상세보기"
         android:layout_margin="5dp" />
 </RelativeLayout>

@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +23,8 @@ public class Tab2Fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private CheckBox cb1, cb2, cb3,cb4,cb5;
-
+    private ListView                m_ListView;
+    private CustomerAdapter    m_Adapter;
 
     public Tab2Fragment() {
         // Required empty public constructor
@@ -45,7 +48,7 @@ public class Tab2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Bundle b = getActivity().getIntent().getExtras();
-        View view = inflater.inflate(R.layout.tab2, container, false);
+        final View view = inflater.inflate(R.layout.tab2, container, false);
         Button btn = (Button)view.findViewById(R.id.select_btn);
         cb1 = (CheckBox)view.findViewById(R.id.checkBox51);
         cb2 = (CheckBox)view.findViewById(R.id.checkBox52);
@@ -55,7 +58,7 @@ public class Tab2Fragment extends Fragment {
         if (btn!=null) {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     JSONObject jo = new JSONObject();
                     try {
                         if (cb1.isChecked()){
@@ -83,6 +86,21 @@ public class Tab2Fragment extends Fragment {
                             try {
                                 JSONArray ja = new JSONArray(result);
                                 Log.e("Tab2Frag",ja.toString());
+                                m_Adapter = new CustomerAdapter();
+
+                                // Xml에서 추가한 ListView 연결
+                                m_ListView = (ListView) view.findViewById(R.id.musicList);
+
+                                // ListView에 어댑터 연결
+                               m_ListView.setAdapter(m_Adapter);
+
+                                // ListView 아이템 터치 시 이벤트 추가
+                                 m_ListView.setOnItemClickListener(onClickListItem);
+
+                                for (int i=0;i<ja.length();i++){
+                                    m_Adapter.add(ja.getJSONObject(i).toString());
+                                }
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -102,12 +120,14 @@ public class Tab2Fragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-    public class ListViewExampleClickListener implements AdapterView.OnItemClickListener{
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    private AdapterView.OnItemClickListener onClickListItem = new AdapterView.OnItemClickListener() {
 
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            // 이벤트 발생 시 해당 아이템 위치의 텍스트를 출력
+            Toast.makeText(getActivity().getApplicationContext(),"CLI~~~~k", Toast.LENGTH_SHORT).show();
         }
-    }
+    };
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
