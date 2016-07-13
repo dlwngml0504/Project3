@@ -92,6 +92,5 @@ public class DetailUploader extends AppCompatActivity {
                 alert.show();
             }
         });
-
     }
 }
