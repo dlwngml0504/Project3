@@ -34,9 +34,10 @@ public class Tab1Fragment  extends Fragment {
     private ProgressBar progressBar;
     private ListView musicList;
 
-    ArrayList<String> music_list = new ArrayList<>();
+    //ArrayList<String> music_list = new ArrayList<>();
 
-    private ArrayAdapter<String> adapter;
+    //private ArrayAdapter<String> adapter;
+    private CustomerAdapter adapter;
 
     private boolean isPlaying;
 
@@ -64,6 +65,7 @@ public class Tab1Fragment  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.tab1, container, false);
+        final Bundle b = getActivity().getIntent().getExtras();
         playButton = (ImageButton) view.findViewById(R.id.button_play);
         pauseButton = (ImageButton) view.findViewById(R.id.button_pause);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
@@ -76,12 +78,17 @@ public class Tab1Fragment  extends Fragment {
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
-                music_list = new ArrayList<>();
+                //music_list = new ArrayList<>();
                 //music_list = new ArrayList<>();
                 try {
                     JSONArray ja = new JSONArray(result);
+                    adapter = new CustomerAdapter(getActivity(), progressBar, playButton, pauseButton,b.getString("userinfo"));
+                    // Xml에서 추가한 ListView 연결
+                    musicList = (ListView) view.findViewById(R.id.musiclist);
+                    // ListView에 어댑터 연결
+                    musicList.setAdapter(adapter);
                     for (int i=0;i<ja.length();i++){
-                        music_list.add(ja.getJSONObject(i).getString("title"));
+                       adapter.add(ja.getJSONObject(i).toString());
                     }
 
                 } catch (JSONException e) {
@@ -93,13 +100,13 @@ public class Tab1Fragment  extends Fragment {
         };
         musicsearch.execute("http://143.248.47.56:1337","all");
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, music_list);
+        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, music_list);
 
-        musicList.setAdapter(adapter);
+        //musicList.setAdapter(adapter);
         musicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                String title = adapter.getItem(position);
+                String title = (String) adapter.getItem(position);
                 Toast.makeText(getContext(), "Play  " + title, Toast.LENGTH_SHORT).show();
                 AsyncHttpClient client = new AsyncHttpClient();
                 RequestParams params = new RequestParams();
