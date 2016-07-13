@@ -88,6 +88,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <Button
+        android:id="@+id/detail_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="업로드한 사람 자세히 보기" />
+    <Button
+        android:id="@+id/like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좋아요"/>
+    <Button
+        android:id="@+id/return_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="돌아가기"/>
 
 
 </LinearLayout>

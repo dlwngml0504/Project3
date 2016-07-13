@@ -42,10 +42,11 @@
         <activity android:name=".Firststep_register" />
         <activity android:name=".ListenerRegister" />
         <activity android:name=".UploadMusic" />
-        <activity android:name=".follower"/>
-        <activity android:name=".following"/>
-        <activity android:name=".musics"/>
-        <activity android:name=".DetailMusic"></activity>
+        <activity android:name=".follower" />
+        <activity android:name=".following" />
+        <activity android:name=".musics" />
+        <activity android:name=".DetailMusic" />
+        <activity android:name=".DetailUploader"></activity>
     </application>
 
 </manifest>

@@ -63,7 +63,7 @@ public class UploadMusic extends AppCompatActivity {
                         }
                         musicinfo.put("uploader",userinfoString);
                         musicinfo.put("URL","https://s3.amazonaws.com/kaistcs4961/"+ name );
-                        Log.e("URL", "https://s3.amazonaws.com/kaistcs4961/"+ name );
+
                         MusicRegister register = new MusicRegister(getApplicationContext());
                         register.execute("http://143.248.47.56:1337",musicinfo.toString(),userinfoString);
                         Intent intent2 = new Intent(UploadMusic.this,SoundMainActivty.class);

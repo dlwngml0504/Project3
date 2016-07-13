@@ -71,7 +71,6 @@ public class Tab1Fragment  extends Fragment {
         musicList = (ListView) view.findViewById(R.id.musiclist);
 
         final LinearLayout menu = (LinearLayout) view.findViewById(R.id.menu);
-        music_list.add("1");
 
        MusicSearch musicsearch = new MusicSearch(getActivity().getApplicationContext()){
             @Override
