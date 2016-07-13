@@ -60,7 +60,7 @@ public class Tab3Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab3, container, false);
         Bundle b = getActivity().getIntent().getExtras();
-        String userinfo = b.getString("userinfo");
+        final String userinfo = b.getString("userinfo");
         user_id = (TextView) view.findViewById(R.id.user_id);
         user_name = (TextView) view.findViewById(R.id.user_name);
         user_state = (TextView) view.findViewById(R.id.user_state);
@@ -184,6 +184,7 @@ public class Tab3Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), follower.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });
@@ -192,6 +193,7 @@ public class Tab3Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), following.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });
@@ -200,6 +202,7 @@ public class Tab3Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), musics.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });
