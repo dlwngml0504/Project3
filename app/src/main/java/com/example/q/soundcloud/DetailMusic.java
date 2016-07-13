@@ -69,7 +69,6 @@ public class DetailMusic extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //Toast.makeText(getApplicationContext(),"LIKE",Toast.LENGTH_SHORT).show();
             }
         });
     }

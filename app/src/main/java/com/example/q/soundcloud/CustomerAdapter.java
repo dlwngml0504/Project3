@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,9 +81,19 @@ public class CustomerAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context,DetailMusic.class);
-                    intent.putExtra("musicinfo", m_List.get(pos) );
+                    String musicinfo = new HttpConnectionThread2().doInBackground("http://143.248.47.56:1337/detailmusic", m_List.get(pos));
+                    intent.putExtra("musicinfo",musicinfo);
                     intent.putExtra("userinfo",userinfo);
                     context.startActivity(intent);
+                }
+            });
+
+            Button like_btn = (Button)convertView.findViewById(R.id.mLike);
+            like_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String musicinfo = new HttpConnectionThread2().doInBackground("http://143.248.47.56:1337/likemusic", m_List.get(pos));
+                    Toast.makeText(context,"Like",Toast.LENGTH_SHORT).show();
                 }
             });
 

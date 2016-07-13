@@ -71,7 +71,7 @@ public class Tab3Fragment extends Fragment {
         user_musics = (Button) view.findViewById(R.id.user_musics);
         user_musics_layout = (LinearLayout) view.findViewById(R.id.music_layout);
         buycash = (Button) view.findViewById(R.id.buycash);
-        Log.v("userinfo", userinfo);
+        //Log.v("userinfo", userinfo);
         final AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("userinfo", userinfo);
