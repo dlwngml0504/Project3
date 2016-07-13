@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.support.v7.app.AlertDialog;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -90,9 +90,32 @@ public class DetailUploader extends AppCompatActivity {
         cash_btn.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-
+                AlertDialog.Builder alert = new AlertDialog.Builder(DetailUploader.this);
+                alert.setTitle("Donate Cash");
+                alert.setMessage("How much?");
+                final EditText input = new EditText(getApplicationContext());
+                alert.setView(input);
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                String value = input.getText().toString();
+                                try {
+                                    userObj = new JSONObject(userinfo);
+                                    userObj.put("value",value);
+                                    new HttpConnectionThread2().doInBackground("http://143.248.47.56:1337/donatecash",userObj.toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                );
+                alert.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        }
+                );
+                alert.show();
             }
         });
-
     }
 }

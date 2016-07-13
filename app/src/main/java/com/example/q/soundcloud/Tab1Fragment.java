@@ -30,16 +30,9 @@ public class Tab1Fragment  extends Fragment {
     private ImageButton playButton, pauseButton, playerButton;
     private ProgressBar progressBar;
     private ListView musicList;
-
-    //ArrayList<String> music_list = new ArrayList<>();
-
-    //private ArrayAdapter<String> adapter;
     private CustomerAdapter adapter;
-
     private boolean isPlaying;
-
     private StreamingMediaPlayer audioStreamer;
-
     private OnFragmentInteractionListener mListener;
 
     public Tab1Fragment() {
@@ -75,31 +68,21 @@ public class Tab1Fragment  extends Fragment {
             @Override
             protected void onPostExecute(String result) {
                 super.onPostExecute(result);
-                //music_list = new ArrayList<>();
-                //music_list = new ArrayList<>();
                 try {
                     JSONArray ja = new JSONArray(result);
                     adapter = new CustomerAdapter(getActivity(), progressBar, playButton, pauseButton,b.getString("userinfo"));
-                    // Xml에서 추가한 ListView 연결
                     musicList = (ListView) view.findViewById(R.id.musiclist);
-                    // ListView에 어댑터 연결
                     musicList.setAdapter(adapter);
                     for (int i=0;i<ja.length();i++){
                        adapter.add(ja.getJSONObject(i).toString());
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //FragmentTransaction ft = getFragmentManager().beginTransaction();
-                //ft.detach(Tab1Fragment.this).attach(Tab1Fragment.this).commit();
             }
         };
         musicsearch.execute("http://143.248.47.56:1337","all");
 
-        //adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, music_list);
-
-        //musicList.setAdapter(adapter);
         musicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -110,7 +93,6 @@ public class Tab1Fragment  extends Fragment {
                 client.get("http://143.248.48.39:8080/getmusic/" + title, new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
                     }
 
                     @Override
