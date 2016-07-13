@@ -218,7 +218,7 @@ public class SoundMainActivty extends AppCompatActivity {
                 case 1:
                     return Tab2Fragment.newInstance();
                 case 2:
-                    return Tab4Fragment.newInstance();
+                    return Tab3Fragment.newInstance();
                 default:
                     return Tab3Fragment.newInstance();
         }
@@ -227,7 +227,7 @@ public class SoundMainActivty extends AppCompatActivity {
     @Override
     public int getCount() {
         // Show 3 total pages.
-            return 4;
+            return 3;
         }
 
         @Override
@@ -239,8 +239,6 @@ public class SoundMainActivty extends AppCompatActivity {
                     return "SECTION 2";
                 case 2:
                     return "SECTION 3";
-                case 3:
-                    return "SECTION 4";
             }
             return null;
         }

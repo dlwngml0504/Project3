@@ -8,8 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -63,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                                 // {Response:  responseCode: 200, graphObject: {"name":"Lee  Ju Hee","id":"991091207678109"}, error: null}
                                 Toast.makeText(MainActivity.this, "Loading.... Please wait", Toast.LENGTH_LONG).show();
                                 UserLogin login = new UserLogin(getApplicationContext());
-                                login.execute("http://143.248.47.56:1337",response.getJSONObject().toString());
+                                login.execute("http://143.248.48.39:1337",response.getJSONObject().toString());
                             }
                         }
                 ).executeAsync();

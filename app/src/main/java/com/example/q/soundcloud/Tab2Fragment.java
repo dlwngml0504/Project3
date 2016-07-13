@@ -3,7 +3,6 @@ package com.example.q.soundcloud;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,7 @@ public class Tab2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final Bundle b = getActivity().getIntent().getExtras();
-        Log.e("Tab2",b.getString("userinfo"));
+       // Log.e("Tab2",b.getString("userinfo"));
         final View view = inflater.inflate(R.layout.tab2, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         playButton = (ImageButton) view.findViewById(R.id.button_play);
@@ -104,7 +103,7 @@ public class Tab2Fragment extends Fragment {
                             }
                         }
                     };
-                    musicsearch.execute("http://143.248.47.56:1337",jo.toString());
+                    musicsearch.execute("http://143.248.48.39:1337",jo.toString());
                 }
             });
         }

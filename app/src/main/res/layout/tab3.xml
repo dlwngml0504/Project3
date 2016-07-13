@@ -11,16 +11,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "ID : "
-            android:textSize="30sp"
+            android:textSize="23sp"
             android:paddingLeft="30dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "ID"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:id="@+id/user_id"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:background="#00ff0000"/>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight= "20dp"
+        android:background="#C6E7FD"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -28,16 +40,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Name : "
-            android:textSize="30sp"
+            android:textSize="23sp"
             android:paddingLeft="30dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Name"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:id="@+id/user_name"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:background="#00ff0000"/>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight= "20dp"
+        android:background="#C6E7FD"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -45,32 +68,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "State : "
-            android:textSize="30sp"
+            android:textSize="23sp"
             android:paddingLeft="30dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "State"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:id="@+id/user_state"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:background="#00ff0000"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text = "Cash : "
-            android:textSize="30sp"
-            android:paddingLeft="30dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text = "Cash"
-            android:textSize="30sp"
-            android:id="@+id/user_cash"/>
-    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight= "20dp"
+        android:background="#C6E7FD"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -79,16 +98,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Follower : "
-            android:textSize="30sp"
+            android:textSize="23sp"
             android:paddingLeft="30dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Follower"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:id="@+id/user_follower"
             android:background="#00ff0000"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight= "20dp"
+        android:background="#C6E7FD"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -97,34 +123,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Following : "
-            android:textSize="30sp"
+            android:textSize="23sp"
             android:paddingLeft="30dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Following"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:id="@+id/user_following"
             android:background="#00ff0000"/>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight= "20dp"
+        android:background="#C6E7FD"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Likes : "
-            android:textSize="30sp"
+            android:text = "보유 캐시 : "
+            android:textSize="23sp"
             android:paddingLeft="30dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Likes"
-            android:textSize="30sp"
-            android:id="@+id/user_likes"/>
+            android:text = "Cash"
+            android:textSize="25sp"
+            android:id="@+id/user_cash"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:background="#00ff0000"/>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,24 +170,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Musics : "
-            android:textSize="30sp"
+            android:textSize="23sp"
             android:paddingLeft="30dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text = "Musics"
-            android:textSize="30sp"
-            android:id="@+id/user_musics"
-            android:background="#00ff0000"/>
+            android:textSize="25sp"
+            android:id="@+id/user_musics"/>
     </LinearLayout>
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginLeft = "30dp"
         android:layout_marginTop = "30dp"
         android:text="Buy Cash"
+        android:background="@drawable/mon"
         android:id="@+id/buycash">
     </Button>
-
 
 </LinearLayout>

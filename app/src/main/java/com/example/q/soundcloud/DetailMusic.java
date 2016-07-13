@@ -1,13 +1,11 @@
 package com.example.q.soundcloud;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,14 +25,16 @@ public class DetailMusic extends AppCompatActivity {
         final TextView mUpload = (TextView)findViewById(R.id.detail_uploadDate);
         final TextView mLikeNum = (TextView)findViewById(R.id.detail_likeNum);
         Button btn = (Button)findViewById(R.id.detail_btn);
-        Button like_btn = (Button)findViewById(R.id.like);
+        final Button like_btn = (Button)findViewById(R.id.like);
         try {
             musicObj = new JSONObject(intent.getStringExtra("musicinfo"));
             mtitle.setText(musicObj.getString("title"));
             mLyricist.setText(musicObj.getString("lyricist"));;
             mComposer.setText(musicObj.getString("composer"));
             mSinger.setText(musicObj.getString("singer"));
-            mUpload.setText(musicObj.getString("date"));
+            String date = musicObj.getString("date").split("T")[0];
+            mUpload.setText(date);
+            like_btn.setText(musicObj.getString("like_num"));
             mLikeNum.setText(musicObj.getString("like_num"));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -60,10 +60,11 @@ public class DetailMusic extends AppCompatActivity {
         like_btn.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-                new HttpConnectionThread2().doInBackground("http://143.248.47.56:1337/likemusic",musicObj.toString());
+                new HttpConnectionThread2().doInBackground("http://143.248.48.39:1337/likemusic",musicObj.toString());
                 int num = 1;
                 num += Integer.parseInt(mLikeNum.getText().toString());
                 mLikeNum.setText(Integer.toString(num));
+                like_btn.setText(Integer.toString(num));
                 try {
                     musicObj.put("like_num",num);
                 } catch (JSONException e) {

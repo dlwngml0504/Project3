@@ -26,18 +26,17 @@
 
     <Button
         android:id="@+id/mListen"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="노래 상세보기"
-        android:layout_marginLeft="5dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginRight="5dp"
+        android:background="@drawable/add"
         android:layout_alignTop="@+id/mTitle"
         android:layout_alignParentEnd="true" />
     <Button
         android:id="@+id/mLike"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="좋아요"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/like"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_alignTop="@+id/mListen"

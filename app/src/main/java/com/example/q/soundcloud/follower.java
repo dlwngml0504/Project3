@@ -10,9 +10,6 @@ import com.loopj.android.http.TextHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
 
-/**
- * Created by q on 2016-07-12.
- */
 public class follower extends AppCompatActivity {
 
     private TextView textview;
@@ -25,7 +22,7 @@ public class follower extends AppCompatActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://143.248.48.39:8080/userinfo/follower/" + id, new TextHttpResponseHandler() {
+        client.get("http://143.248.48.39:1337/userinfo/follower/" + id, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 

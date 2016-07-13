@@ -10,25 +10,52 @@
     android:orientation="vertical"
     tools:context="com.example.q.soundcloud.DetailUploader">
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="170dp"
+        android:background="@drawable/artist"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/up_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#68B8EE"
+        android:textSize="20sp"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이름 : "/>
+            android:text="Follower  "/>
         <TextView
-            android:id="@+id/up_name"
+            android:id="@+id/up_follower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="명"/>
     </LinearLayout>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/hue"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,29 +66,24 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Follower 수: "/>
-        <TextView
-            android:id="@+id/up_follower"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/doFollow"
+            android:layout_width="160dp"
+            android:layout_height="120dp"
+            android:background="@drawable/fo"
+            android:layout_gravity="bottom"/>
+        <Button
+            android:id="@+id/givecash"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:background="@drawable/donate"
+            android:layout_gravity="bottom"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/doFollow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="팔로우하기"/>
-    <Button
-        android:id="@+id/givecash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="별풍선주기"/>
-
     </LinearLayout>

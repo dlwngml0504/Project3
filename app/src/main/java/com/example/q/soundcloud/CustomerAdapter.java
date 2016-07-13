@@ -81,7 +81,7 @@ public class CustomerAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context,DetailMusic.class);
-                    String musicinfo = new HttpConnectionThread2().doInBackground("http://143.248.47.56:1337/detailmusic", m_List.get(pos));
+                    String musicinfo = new HttpConnectionThread2().doInBackground("http://143.248.48.39:1337/detailmusic", m_List.get(pos));
                     intent.putExtra("musicinfo",musicinfo);
                     intent.putExtra("userinfo",userinfo);
                     context.startActivity(intent);
@@ -92,7 +92,7 @@ public class CustomerAdapter extends BaseAdapter {
             like_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String musicinfo = new HttpConnectionThread2().doInBackground("http://143.248.47.56:1337/likemusic", m_List.get(pos));
+                    String musicinfo = new HttpConnectionThread2().doInBackground("http://143.248.48.39:1337/likemusic", m_List.get(pos));
                     Toast.makeText(context,"Like",Toast.LENGTH_SHORT).show();
                 }
             });

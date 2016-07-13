@@ -24,7 +24,7 @@ public class musics extends AppCompatActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://143.248.48.39:8080/userinfo/musics/" + id, new TextHttpResponseHandler() {
+        client.get("http://143.248.48.39:1337/userinfo/musics/" + id, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 

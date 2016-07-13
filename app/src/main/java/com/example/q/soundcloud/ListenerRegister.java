@@ -30,7 +30,6 @@ public class ListenerRegister extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = getIntent();
-                    Log.e("@@@@@@@2","@@@@@@@@@@@@");
                     try {
                         JSONObject userinfo = new JSONObject(intent.getStringExtra("user"));
                         userinfo.put("name",userinfo.getString("name"));
@@ -53,7 +52,7 @@ public class ListenerRegister extends AppCompatActivity {
                         }
                         UserRegister register = new UserRegister(getApplicationContext());
                         Log.e("ListenerReg",userinfo.toString());
-                        register.execute("http://143.248.47.56:1337",userinfo.toString());
+                        register.execute("http://143.248.48.39:1337",userinfo.toString());
                         Intent intent2 = new Intent(ListenerRegister.this,SoundMainActivty.class);
                         intent2.putExtra("userinfo",intent.getStringExtra("user"));
                         startActivity(intent2);

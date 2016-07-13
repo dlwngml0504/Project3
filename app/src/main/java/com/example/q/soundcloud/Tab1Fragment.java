@@ -81,7 +81,7 @@ public class Tab1Fragment  extends Fragment {
                 }
             }
         };
-        musicsearch.execute("http://143.248.47.56:1337","all");
+        musicsearch.execute("http://143.248.48.39:1337","all");
 
         musicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,7 +90,7 @@ public class Tab1Fragment  extends Fragment {
                 Toast.makeText(getContext(), "Play  " + title, Toast.LENGTH_SHORT).show();
                 AsyncHttpClient client = new AsyncHttpClient();
                 RequestParams params = new RequestParams();
-                client.get("http://143.248.48.39:8080/getmusic/" + title, new TextHttpResponseHandler() {
+                client.get("http://143.248.48.39:1337/getmusic/" + title, new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                     }

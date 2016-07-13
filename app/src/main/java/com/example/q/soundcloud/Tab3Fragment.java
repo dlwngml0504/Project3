@@ -67,7 +67,6 @@ public class Tab3Fragment extends Fragment {
         user_cash = (TextView) view.findViewById(R.id.user_cash);
         user_follower = (Button) view.findViewById(R.id.user_follower);
         user_following = (Button) view.findViewById(R.id.user_following);
-        user_likes = (TextView) view.findViewById(R.id.user_likes);
         user_musics = (Button) view.findViewById(R.id.user_musics);
         user_musics_layout = (LinearLayout) view.findViewById(R.id.music_layout);
         buycash = (Button) view.findViewById(R.id.buycash);
@@ -75,7 +74,7 @@ public class Tab3Fragment extends Fragment {
         final AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("userinfo", userinfo);
-        client.get("http://143.248.47.56:1337/userinfo", params, new TextHttpResponseHandler() {
+        client.get("http://143.248.48.39:1337/userinfo", params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -87,7 +86,7 @@ public class Tab3Fragment extends Fragment {
             }
         });
 
-        client.get("http://143.248.47.56:1337/userinfo/" + id, new TextHttpResponseHandler() {
+        client.get("http://143.248.48.39:1337/userinfo/" + id, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -151,7 +150,7 @@ public class Tab3Fragment extends Fragment {
                                 String value = input.getText().toString();
                                 RequestParams params = new RequestParams();
                                 params.put("value", value);
-                                client.put("http://143.248.48.39:8080/buycash/" + id, params, new TextHttpResponseHandler() {
+                                client.put("http://143.248.48.39:1337/buycash/" + id, params, new TextHttpResponseHandler() {
                                     @Override
                                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
