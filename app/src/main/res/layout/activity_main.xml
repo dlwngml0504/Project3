@@ -7,21 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#5F6A71"
     tools:context="com.example.q.soundcloud.MainActivity">
 
     <ImageView
         android:id="@+id/mainpic"
         android:layout_width="match_parent"
-        android:layout_height="250sp"
-        android:background="@drawable/mainpic"
-        android:layout_marginTop="100dp" />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#5F6A71"
-        android:layout_marginTop="310dp"
-        android:layout_alignParentStart="true" />
+        android:layout_height="350dp"
+        android:background="@drawable/lava"/>
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"

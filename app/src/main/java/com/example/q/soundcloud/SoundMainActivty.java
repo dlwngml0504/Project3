@@ -234,11 +234,11 @@ public class SoundMainActivty extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "MUSIC";
                 case 1:
-                    return "SECTION 2";
+                    return "장르별 음악";
                 case 2:
-                    return "SECTION 3";
+                    return "MyInfo";
             }
             return null;
         }
